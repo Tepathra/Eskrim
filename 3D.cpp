@@ -3,6 +3,7 @@
                     Jafrin J.J.S (10108481)
                     Trifonio M.F.S. Da Costa (10108512)
        		        Atep Nurdin (10108489)
+       		        Tekan W untuk memunculkan gambar
   Deskripsi       : Tugas Openg GL 3D*/
 
 #include "stdlib.h"
@@ -14,7 +15,7 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
      void renderScene(void)
      {
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-     glClearColor(0,1,0,1);
+     glClearColor(0,0,0,0);
      glLoadIdentity();
      glTranslatef(0,0,z);
      glRotatef(sudut,x1,y1,z1);
@@ -22,20 +23,20 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
  
 
      //ESKRIM
-     glPopMatrix();
+     
      glPushMatrix();
      glTranslatef(0,4,0);
      glColor3f(1,1,1);
-     glutWireSphere(2.2,200,50); 
-
-    
-     //CONE
+     glutSolidSphere(2.2,200,50); 
      glPopMatrix();
+     
+     //CONE
+     
      glPushMatrix();
      glTranslatef(0,3,0);
      glRotatef(90,1,0,0);
-     glColor3f(0,0,1);
-     glutWireCone(2,4,200,50);
+     glColor3f(1,0.5,0);
+     glutSolidCone(2,4,200,50);
      glPopMatrix();
      glutSwapBuffers();
      }
@@ -88,14 +89,21 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
          }
      }
 
-     void init()
+     void init(void)
      {
-     glClearColor(0,0,0,1);
+     glClearColor(0,0,0,0);
+     GLfloat modelambient[] = { 1 , 0.1, 0.1, 1.0 };
      glEnable(GL_DEPTH_TEST);
+     glEnable(GL_LIGHTING);
+     glEnable(GL_LIGHT0);
+     glColorMaterial ( GL_FRONT_AND_BACK, GL_EMISSION ) ;
+     glEnable ( GL_COLOR_MATERIAL ) ;
+     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, modelambient);
      glMatrixMode(GL_PROJECTION);
      glLoadIdentity();
      gluPerspective(45.0,(GLdouble) w/(GLdouble) h, 1.0,300.0);
      glMatrixMode(GL_MODELVIEW);
+     
      }
 
      void timer(int value)
@@ -104,13 +112,16 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
          glutTimerFunc(50,timer,0);
      }
 
+
+
+
      int main (int argc, char **argv)
      {
          glutInit(&argc, argv);
          glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
          glutInitWindowPosition(100,100);
          glutInitWindowSize(w,h);
-         glutCreateWindow("3D");
+         glutCreateWindow("3D Eskrim");
          gluOrtho2D(-w/2,w/2,-h/2,h/2);
          glutDisplayFunc(renderScene);
          glutReshapeFunc(resize);
@@ -120,3 +131,6 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
          init();
          glutMainLoop();
      }
+
+
+
