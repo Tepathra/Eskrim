@@ -3,7 +3,12 @@
                     Jafrin J.J.S (10108481)
                     Trifonio M.F.S. Da Costa (10108512)
        		        Atep Nurdin (10108489)
-       		        Tekan W untuk memunculkan gambar
+
+       		        Tekan W untuk memunculkan gambar / Menjauhkan Gambar
+       		        Tekan S untuk mendekatkan gambar
+       		        Tekan X untuk memutar searah sumbu x
+       		        Tekan Y untuk memutar searah sumbu Y
+       		        Tekan Z untuk memutar searah sumbu Z
   Deskripsi       : Tugas Openg GL 3D*/
 
 #include "stdlib.h"
@@ -15,34 +20,26 @@ int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
 void renderScene(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0,0,0,0);
+    glClearColor(0.4,0,0,0);
     glLoadIdentity();
     glTranslatef(0,0,z);
     glRotatef(sudut,x1,y1,z1);
-
-
-//kubus
-    glPushMatrix();
-    glTranslatef(-5,-4,-6);
-    glColor3f(1.0,0.3,0);
-    glutSolidTorus(1,3,109,800);
-    glPopMatrix();
 
     //ESKRIM
 
     glPushMatrix();
     glTranslatef(0,4,0);
-    glColor3f(1,1,1);
-    glutSolidSphere(2.2,200,50); //buat
+    glColor3f(0.7,1,1);
+    glutWireSphere(2.5,200,50);
     glPopMatrix();
 
     //CONE
 
     glPushMatrix();
-    glTranslatef(0,5.6,0);
+    glTranslatef(0,2.5,0);
     glRotatef(90,1,0,0);
-    glColor3f(1,0.5,0);
-    glutSolidCone(2,4,200,50);
+    glColor3f(0.8,0.5,0.1);
+    glutWireCone(2,4,200,50);
     glPopMatrix();
     glutSwapBuffers();
 }
@@ -100,7 +97,7 @@ void mySpecialKeyboard(int key, int x, int y)
 void init(void)
 {
     glClearColor(0,0,0,0);
-    GLfloat modelambient[] = { 1 , 0.1, 0.1, 1.0 };
+    GLfloat modelambient[] = { 0, 0.2, 0.5, 0.5 };
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -129,7 +126,7 @@ int main (int argc, char **argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
     glutInitWindowPosition(100,100);
     glutInitWindowSize(w,h);
-    glutCreateWindow("3D Eskrim");
+    glutCreateWindow("3D Eskrim, Tekan W untuk memunculkan gambar");
     gluOrtho2D(-w/2,w/2,-h/2,h/2);
     glutDisplayFunc(renderScene);
     glutReshapeFunc(resize);
@@ -139,6 +136,3 @@ int main (int argc, char **argv)
     init();
     glutMainLoop();
 }
-
-
-
