@@ -3,7 +3,6 @@
                     Jafrin J.J.S (10108481)
                     Trifonio M.F.S. Da Costa (10108512)
        		        Atep Nurdin (10108489)
-
        		        Tekan W untuk memunculkan gambar / Menjauhkan Gambar
        		        Tekan S untuk mendekatkan gambar
        		        Tekan X untuk memutar searah sumbu x
